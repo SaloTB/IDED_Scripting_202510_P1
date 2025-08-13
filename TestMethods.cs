@@ -76,24 +76,12 @@ internal static class TestMethods
     internal static Queue<uint> CreateQueueFromStack(Stack<uint> stack)
     {
         Queue<uint> queue = new Queue<uint>();
-        if (stack == null || stack.Count == 0)
-            return queue;
+        if (stack == null || stack.Count == 0) return queue;
 
-        // Pila temporal para invertir una vez
-        Stack<uint> temp = new Stack<uint>();
-
-        // Pasamos de stack a temp (esto invierte el orden)
-        while (stack.Count > 0)
+        // Enmuerar la pila (de cima a fondo) 
+        foreach (uint x in stack)
         {
-            temp.Push(stack.Pop());
-        }
-
-        // Ahora devolvemos los elementos a stack y los añadimos a queue
-        while (temp.Count > 0)
-        {
-            uint val = temp.Pop();
-            stack.Push(val);    // restauramos la pila original
-            queue.Enqueue(val); // encolamos en el orden correcto
+            queue.Enqueue(x);
         }
 
         return queue;
@@ -104,23 +92,12 @@ internal static class TestMethods
     internal static List<uint> StackToList(Stack<uint> stack)
     {
         List<uint> list = new List<uint>();
-        if (stack == null || stack.Count == 0)
-            return list;
+        if (stack == null || stack.Count == 0) return list;
 
-        Stack<uint> temp = new Stack<uint>();
-
-        // Sacar de la pila a temp (invierte el orden)
-        while (stack.Count > 0)
+        // Enumerar la pila (de cima a fondo) y agregar a la lista en ese orden
+        foreach (uint x in stack)
         {
-            temp.Push(stack.Pop());
-        }
-
-        // Devolver a la pila y llenar lista en el mismo orden
-        while (temp.Count > 0)
-        {
-            uint val = temp.Pop();
-            stack.Push(val);  // restauramos la pila
-            list.Add(val);    // añadimos a lista respetando orden
+            list.Add(x);
         }
 
         return list;
